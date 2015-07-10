@@ -1,0 +1,46 @@
+<html>
+<head>
+	</head>
+	<body>
+
+
+<canvas id="canvas" width="400" height="300"></canvas>
+
+<script type="text/javascript">
+	var data = [75,68,32,95,20,51];
+	var canvas = document.getElementById('canvas');
+
+var colors = ["#7E3817", "#C35817", "#EE9A4D", "#A0C544", "#348017", "#307D7E"];
+
+var center = [canvas.width / 2, canvas.height / 2];
+
+var radius = Math.min(canvas.width, canvas.height) / 2;
+
+var lastPosition = 0, total = 0;
+
+
+
+var ctx = canvas.getContext('2d');
+
+for(var i in data) { total += data[i]; }
+for (var i = 0; i < data.length; i++) {
+
+ctx.fillStyle = colors[i];
+
+ctx.beginPath();
+
+ctx.moveTo(center[0],center[1]);
+
+ctx.arc(center[0],center[1],radius,lastPosition,lastPosition+(Math.PI*2*(data[i]/total)),false);
+
+ctx.lineTo(center[0],center[1]);
+
+ctx.fill();
+
+lastPosition += Math.PI*2*(data[i]/total);
+
+}
+
+</script>
+</body>
+</html>

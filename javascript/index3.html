@@ -1,0 +1,118 @@
+<html>
+
+<head>
+
+    <title>Pie Chart</title>
+
+    
+
+</head>
+
+<body>
+
+    <div align="center">
+
+        
+
+        <canvas id="can" height="400" width="600">
+
+        </canvas>
+
+    </div>
+
+    
+
+    <script type="text/javascript">
+
+    var dataStack = [
+            {id: 1, subject: 'Maths', score: 60},
+            {id: 2, subject: 'Physics', score: 20},
+            {id: 3, subject: 'Nepali', score: 100},
+            {id: 4, subject: 'Chemistry', score:40},
+            {id: 5, subject: 'Chemistry', score:88},
+            {id: 6, subject: 'Chemistry', score:78},
+            {id: 7, subject: 'English', score:60}
+        ];
+
+       var canvas = document.getElementById('can');
+            var ctx = canvas.getContext('2d');
+            var dataValue = [];
+            var dataName = [];
+            var degree = [];
+            var percentage = [];
+            var ids = [[]];
+ 
+            for (var i=0; i<dataStack.length; i++){
+                dataValue.push(dataStack[i].score);
+                dataName.push(dataStack[i].subject);
+            }
+
+            console.log(dataValue);
+
+
+            var colors = ["#990099","#109618","#ff9900","#dc3912","#3366cc","#004411","#7E3817", "#00cc00", "#C35817", "#EE9A4D", "#A0C544", "#348017", "#307D7E","#5136f6", "#e2f5b4","#fc081f", "#E0FFFF", "#9edd08","#fb1ef8","#fdfbb4", "#faf406","#fbd4b7", "#f2700f","#f8bdb4", "#ea2507","#e2bcbd", "#9e2126","#bbddb3", "#1d8e04"];
+            var center = [canvas.width / 2, canvas.height / 2];
+            var radius = Math.min(canvas.width, canvas.height) / 2;
+            var lastPosition = 0, total = 0;
+             /* var myOverFunction = function(){
+                        ctx.fillStyle = colors[i];
+                        ctx.beginPath();
+                        ctx.moveTo(center[0],center[1]);
+                        ctx.arc(center[0],center[1],radius,lastPosition,lastPosition+(Math.PI*2*(dataValue[i]/total)),false);
+                        ctx.lineTo(center[0],center[1]);
+                        ctx.fill();
+                        var imgData=ctx.getImageData(153,0,153,50);
+                        ctx.putImageData(imgData,10,70);
+                    };
+*/
+            var draw = function(){
+            for(var i in dataValue) { total += dataValue[i]; 
+                console.log(i, dataValue[i]);}
+                for (var i = 0; i < dataValue.length; i++) {
+                    degree.push((dataValue[i]/total) *360);
+                    var percent = (dataValue[i]/total) *360;
+                    percentage.push(percent * (100/360));
+                    var outerRadius = lastPosition+(Math.PI*2*(dataValue[i]/total))
+                    ctx.fillStyle = colors[i];
+                    ctx.beginPath();
+                    ctx.moveTo(center[0],center[1]);
+                    ctx.arc(center[0],center[1],radius,lastPosition,lastPosition+(Math.PI*2*(dataValue[i]/total)),false);
+                    ctx.lineTo(center[0],center[1]);
+                    ctx.fill();
+                    lastPosition += Math.PI*2*(dataValue[i]/total);
+                    ctx.strokeStyle = 'white';
+                    //ctx.translate(center[0],center[1]);
+                    ctx.shadowColor   = '#666';
+                    //ctx.rotate(0.02);
+                    //ctx.translate(-center[0],-center[1]);
+                    //ctx.shadowOffsetX = (center[0],center[1]);
+                    //ctx.shadowOffsetY = (center[0],center[1]); 
+                    //ctx.shadowOffsetX = 1;
+                    //ctx.shadowOffsetY = 1;
+                   // ctx.shadowBlur    = 2;   
+                    ctx.stroke();
+                    ids.push(center[0],center[1]);
+                }
+
+                for(var i=0;i<dataValue.length;i++){
+                     ctx.fillStyle = colors[i];
+                     //ctx.rotate(360);
+                    ctx.fillRect(550,(i+1)*40,30,30);
+                    ctx.fillText(dataName[i],505,55+(i*40));
+                    ctx.fillText(degree[i].toFixed(2) + '\xB0',505,65+(i*40));
+                    ctx.fillText(percentage[i].toFixed(2) + '%',505,75+(i*40));
+                    //console.log(center[0],center[1] + 'id' +i);
+                };
+
+
+            };
+            draw();
+
+        
+
+    </script>
+
+</body>
+
+</html>
+

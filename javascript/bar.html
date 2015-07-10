@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<script>
+		window.onload = function(){
+			var canvas = document.getElementById('myCanvas');
+			var ctx = canvas.getContext('2d');
+
+			var dataName = [];
+			var dataValue = [];
+			var width = 50;
+			var currX = 50;
+			var base = 200; 
+			var maxValue = 0;
+			var colHead = 50;
+			var margin = 10;
+
+            var rowHead = 60;
+
+			var dataStack = [
+            {id: 1, subject: 'Maths', score: 60},
+            {id: 2, subject: 'Physics', score: 50},
+            {id: 3, subject: 'Nepali', score: 100},
+            {id: 4, subject: 'Chemistry', score:88},
+            {id: 5, subject: 'Chemistry', score:88},
+            {id: 6, subject: 'Chemistry', score:78},
+            {id: 7, subject: 'English', score:60}
+        ];
+
+        for(var i=0;i<dataStack.length;i++){
+        	dataName.push(dataStack[i].subject);
+        	dataValue.push(dataStack[i].score);
+        }
+
+        for(var i=0;i<dataValue[i];i++){
+            if(dataValue[i]>maxValue){
+                maxValue = dataValue[i];
+            }
+        }
+
+        var stepSize = maxValue/dataValue.length;
+
+        yScalar = (canvas.height - colHead - margin) / (maxValue);
+
+        xScalar = (canvas.width - rowHead) / (numSamples + 1);
+
+        ctx.fillStyle = 'green';
+        for(var i=0;i<dataValue.length;i++){
+        	var h = dataValue[i];
+        	ctx.fillRect(currX,canvas.height-h,width,h);
+        	currX +=width + 10;
+        }
+	};
+		</script>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="400" height="400"/>
+	</body>
+</html>

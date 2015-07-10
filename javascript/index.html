@@ -1,0 +1,19 @@
+<html>
+<head>
+</head>
+<body>
+	<div>
+		 <input type="file" id="fileUpload" />
+		<input type="button" id="upload" value="Upload" />
+<div id="dvCSV">
+</div>
+	</div>
+	<script type="text/javascript" src= 'csvread.js'>
+	</script>
+	<script type="text/javascript">
+		upload.onclick = function(){
+		var read = new Read (document.getElementById('fileUpload'));
+	}
+	</script>
+</body>
+</html>
